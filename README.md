@@ -1,5 +1,10 @@
 # func-gen
 
+func-gen can be used to generate unix text processing utilities from English text.
+It uses [langchain](https://python.langchain.com/en/latest/index.html) to create javascript functions
+to process text, and it uses [Extism](https://extism.org/) and the [JavaScript PDK](https://extism.org/docs/write-a-plugin/js-pdk)
+to safely execute the code in a Wasm sandbox.
+
 ## Install
 
 ```
