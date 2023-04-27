@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "func-gen"
+name = "extism-func-gen"
 version = "0.1.0"
 description = ""
 authors = ["The Extism Authors <oss@extism.org>"]
