@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "func-gen"
+version = "0.1.0"
+description = ""
+authors = ["The Extism Authors <oss@extism.org>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "func_gen"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+extism = "^0.3.0"
+langchain = "^0.0.150"
+openai = "^0.27.4"
+
+[tool.poetry.scripts]
+func-gen = "func_gen:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
