@@ -23,5 +23,9 @@ func-gen count_vowels -d "Write a function that counts the number of vowels in a
 # Use a func
 echo "hello world" | func-gen count_vowels
 # 3
+
+
+# List the funcs
+func-gen --list
 ```
 

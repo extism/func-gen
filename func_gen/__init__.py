@@ -46,11 +46,12 @@ def execute_code(code, input):
 
 def init_argparse():
     parser = argparse.ArgumentParser(
-        usage="%(prog)s FUNC_NAME [OPTIONS]",
+        usage="%(prog)s [FUNC_NAME] [OPTIONS]",
         description="Create and execute text processing functions by English descriptions"
     )
-    parser.add_argument('func_name', type=str)
+    parser.add_argument('func_name', type=str, nargs='?')
     parser.add_argument('-d', '--description', type=str, nargs='?')
+    parser.add_argument('-l', '--list', action=argparse.BooleanOptionalAction)
     return parser
 
 def main():
@@ -59,6 +60,16 @@ def main():
 
     if not os.path.exists(HOME_DIR):
         os.makedirs(HOME_DIR)
+
+    if args.list:
+        import glob
+        for f in glob.glob(str(HOME_DIR / "*.js")):
+            print(os.path.basename(f)[:-3])
+        exit(0)
+
+    if not args.func_name:
+        print("Function name is a required argument")
+        exit(1)
 
     if args.description:
         code = generate_code(args.description)
