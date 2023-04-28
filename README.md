@@ -8,7 +8,7 @@ to safely execute the code in a Wasm sandbox.
 ## Install
 
 ```
-pip install extism-func-gen
+pip install --upgrade extism-func-gen
 ```
 
 ## Run
