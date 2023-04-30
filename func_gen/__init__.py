@@ -11,7 +11,7 @@ from langchain.schema import (
     SystemMessage
 )
 
-MARKDOWN_RE = re.compile("\\`\\`\\`javascript([^\\`]*)\\`\\`\\`")
+MARKDOWN_RE = re.compile("\\`\\`\\`(javascript|js)([^\\`]*)\\`\\`\\`")
 HOME_DIR = pathlib.Path.home() / ".func-gen"
 
 
@@ -20,7 +20,24 @@ def generate_code(description):
 
     messages = [
         SystemMessage(content="Your goal is to write a Javascript function."),
-        SystemMessage(content="You must export the function as the default export, using the CommonJS module syntax"),
+        SystemMessage(content="You must export the function as the default export, using the CommonJS module syntax."),
+        SystemMessage(content="You should not import or require any code."),
+        SystemMessage(content="""
+This JavaScript environment has a global object for making http request called "Http". On that object is a function
+"request" which is a synchronous, blocking funciton and has the following jsdoc:
+
+@param {Object} request - The HTTP request object
+@param {string} request.url - The url for the request
+@param {string} request.method - The HTTP method for the request
+@param {Object} request.headers - Key-Value pairs to be assigned to the headers of the response
+@param {string} body - The request HTTP body. This parameter is required. Use null if the body is not needed.
+@return {HttpResponse} - the HTTP response
+
+It returns an HttpResponse which has two properties, a "body" containing the HTTP response body as a string
+and "status_code" which contains the integer Http status code.
+
+You are to use this function to make http requests
+                      """.strip()),
         SystemMessage(content="You must not include any comments, explanations, or markdown. The response should be JavaScript only."),
         HumanMessage(content=description),
     ]
@@ -28,8 +45,8 @@ def generate_code(description):
     response = chat(messages)
     code = response.content
     match = MARKDOWN_RE.match(code)
-    if match and match.group(1):
-        code = match.group(1)
+    if match and match.group(2):
+        code = match.group(2)
     return code
 
 
