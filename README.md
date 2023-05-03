@@ -5,7 +5,9 @@ It uses [langchain](https://python.langchain.com/en/latest/index.html) to create
 to process text, and it uses [Extism](https://extism.org/) and the [JavaScript PDK](https://extism.org/docs/write-a-plugin/js-pdk)
 to safely execute the code in a Wasm sandbox.
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/d956147a1a7d449391ec0778ebe12918" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+## Demo Video
+
+[https://www.loom.com/share/d956147a1a7d449391ec0778ebe12918](https://www.loom.com/share/d956147a1a7d449391ec0778ebe12918)
 
 ## Install
 
