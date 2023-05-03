@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "extism-func-gen"
-version = "0.3.0"
+version = "0.4.0"
 description = ""
 authors = ["The Extism Authors <oss@extism.org>"]
 license = "MIT"

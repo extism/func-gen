@@ -26,17 +26,22 @@ def generate_code(description):
 This JavaScript environment has a global object for making http request called "Http". On that object is a function
 "request" which is a synchronous, blocking funciton and has the following jsdoc:
 
-@param {Object} request - The HTTP request object
-@param {string} request.url - The url for the request
-@param {string} request.method - The HTTP method for the request
-@param {Object} request.headers - Key-Value pairs to be assigned to the headers of the response
-@param {string} body - The request HTTP body. This parameter is required. Use null if the body is not needed.
+@param {Object} request - Required: The HTTP request object
+@param {string} request.url - Required: The url for the request
+@param {string} request.method - Required: The HTTP method for the request
+@param {Object} request.headers - Optional: Key-Value pairs to be assigned to the headers of the response
+@param {string} body - Required: The request HTTP body. This parameter is required. Use null if the body is not needed.
 @return {HttpResponse} - the HTTP response
 
 It returns an HttpResponse which has two properties, a "body" containing the HTTP response body as a string
 and "status_code" which contains the integer Http status code.
 
 You are to use this function to make http requests
+                      """.strip()),
+        SystemMessage(content="""
+An example of making a GET HTTP request would look like:
+
+let response = Http.request({ url: "https://example.com", method: "GET", headers: {} }, null)
                       """.strip()),
         SystemMessage(content="You must not include any comments, explanations, or markdown. The response should be JavaScript only."),
         HumanMessage(content=description),
@@ -107,8 +112,9 @@ def main():
         print(f"  func-gen {args.func_name} -d 'Write a function that counts the number of vowels in a string'")
         exit(1)
 
+    inpt = sys.stdin.read() if not sys.stdin.isatty() else ""
     with open(target, 'r') as file:
-        result = execute_code(file.read(), sys.stdin.read())
+        result = execute_code(file.read(), inpt)
         print(result.decode('utf-8'))
 
 
